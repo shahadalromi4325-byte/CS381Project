@@ -1,0 +1,531 @@
+/* ========== RESET ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* ✅ handles smooth scrolling natively */
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ========== BACKGROUND VIDEO ========== */
+/* ✅ Removed duplicate .background wrapper div and second .backgraund overlay */
+img.hero-gif {
+  position: fixed;
+  inset: 0;               /* shorthand for top/right/bottom/left: 0 */
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 42, 80, 0.65);
+  z-index: -1;
+}
+
+/* ========== LOGO ========== */
+.logo{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 999;
+  width: 105px;
+  height: 105px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.logo-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0);
+  padding: 5px;
+}
+/* ========== PROFILE BUTTON ========== */
+.profile-circle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background 0.3s;
+}
+
+.profile-circle .link {
+  color: #283971;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.profile-circle:hover {
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 14px #203a5a;
+}
+
+/* ========== NAVIGATION ========== */
+.nav-links {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.nav-links.scrolled {
+  background: rgba(0, 0, 0, 0.85);
+  top: 0;
+  border-radius: 0 0 28px 28px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.links {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.links::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #283971;
+  transition: all 0.3s ease;
+}
+
+.links:hover { color: #2b3863; }
+.links:hover::after { width: 100%; left: 0; }
+
+/* ========== HERO ========== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+.contant {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  animation: fadeUp 1.8s ease forwards;
+}
+#home{
+  background: rgba(255, 255, 255, 0.15);
+}
+.contant h1 {
+  font-size: clamp(36px, 6vw, 80px); /* ✅ responsive font, no breakpoints needed */
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* ========== BUTTONS ========== */
+/* ✅ Replaced input[type=button] with proper <button> elements */
+.button-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  font-size: 1.1rem;
+  padding: 12px 36px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: #5E5496;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #283971;
+  box-shadow: 0 0 18px #28397188;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.42);
+  color: #1a2e50;
+  box-shadow: 0 0 18px #203a5a88;
+}
+
+/* ========== SECTIONS (shared) ========== */
+/* ✅ hero-section gets .visible immediately in HTML — no JS flash */
+section {
+  min-height: 100vh;
+  padding: 90px 20px 60px;
+  background: white;
+  color: #333;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  color: #333;
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 4px;
+  background: #283971;
+  border-radius: 2px;
+}
+
+/* ========== ANNOUNCEMENTS ========== */
+.announcements {
+  background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
+}
+
+.announcements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.announcement-card {
+  background: white;
+  border-left: 5px solid #283971;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+
+.announcement-card:hover { transform: translateY(-5px); }
+
+.announcement-card > i {
+  font-size: 36px;
+  color: #283971;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.announcement-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.announcement-card p  { color: #666; line-height: 1.6; }
+
+.announcement-date {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  color: #283971;
+}
+
+/* ========== POPULAR BOOKS ========== */
+.popular-books { background: white; }
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.book-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 22px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+}
+
+.book-icon { font-size: 54px; color: #283971; margin-bottom: 14px; }
+.book-card h4 { font-size: 1rem; margin-bottom: 6px; color: #333; }
+.book-card p  { font-size: 0.88rem; color: #666; }
+
+.availability {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 12px;
+  background: #28a745;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.78rem;
+}
+
+/* ✅ Low stock badge */
+.availability.low { background: #e07b00; }
+
+/* ========== SERVICES ========== */
+.services-section {
+  background: linear-gradient(135deg, #5E5496, #44AF69);
+  color: white;
+}
+
+.services-section .section-title { color: white; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 34px 22px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.service-card:hover {
+  background: rgba(255,255,255,0.26);
+  transform: scale(1.04);
+}
+
+.service-card i  { font-size: 46px; margin-bottom: 18px; display: block; }
+.service-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.service-card p  { opacity: 0.85; font-size: 0.95rem; }
+
+/* ========== NEWS ========== */
+.news-section { background: #f0f2f5; }
+
+.news-list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.news-item {
+  background: white;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.news-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: #2D54A4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+}
+
+.news-content h4 { color: #222; margin-bottom: 4px; }
+.news-content p  { color: #666; font-size: 0.92rem; }
+.news-date { color: #2D54A4; font-size: 0.82rem; margin-top: 6px; display: block; }
+
+/* ========== FEEDBACK FORM ========== */
+.feedback-form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+#feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 14px;
+  border: 2px solid #ddd;
+  border-radius: 9px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #b21f2d;
+}
+
+/* ✅ Validation error styles */
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border-color: #e03030;
+}
+
+.error-msg {
+  color: #e03030;
+  font-size: 0.82rem;
+  min-height: 16px;
+}
+
+.form-success {
+  display: none;
+  color: #1a7a3c;
+  background: #d4f4e2;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: #1a1a2e;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  padding: 36px 20px;
+  line-height: 2;
+}
+
+/* ========== SCROLL TO TOP ========== */
+/* ✅ Changed from div to <button> for accessibility */
+.scroll-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  background: #55C3F0;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-top:hover {
+  background: #8a1a25;
+  transform: translateY(-4px);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .nav-links { width: 92%; padding: 0.5rem 1rem; }
+  ul { gap: 1rem; }
+  .links { font-size: 12px; }
+  .links i { font-size: 12px; }
+
+  .contant { left: 5%; right: 5%; }
+
+  .news-item { flex-direction: column; text-align: center; }
+  .announcements-grid { grid-template-columns: 1fr; }
+}

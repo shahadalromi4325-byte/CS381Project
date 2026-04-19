@@ -1,0 +1,267 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import url("https://use.fontawesome.com/releases/v6.5.1/css/all.css");
+header{
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+header img{
+  display: block;
+  width: 150px;
+  height: auto;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  background:linear-gradient(135deg, #2D54A4, #55C3F0, #283971, #5E5496, #44AF69);
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(31, 58, 107, 0.7);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+@property --a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.box {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  z-index: 10;
+  background: repeating-conic-gradient(
+    from var(--a),
+    #5E5496 0%,
+    #5E5496 5%,
+    transparent 5%,
+    transparent 40%,
+    #44AF69 50%
+  );
+  filter: drop-shadow(0 15px 50px #19243d80);
+  border-radius: 20px;
+  animation: rotating 4s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+@keyframes rotating {
+  0% {
+    --a: 0deg;
+  }
+  100% {
+    --a: 360deg;
+  }
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-conic-gradient(
+    from var(--a),
+    #305280 0%,
+    #305280 5%,
+    transparent 5%,
+    transparent 40%,
+    #fff 50%
+  );
+  filter: drop-shadow(0 15px 50px #19243d45);
+  border-radius: 20px;
+  animation: rotating 4s linear infinite;
+  animation-delay: -1s;
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: #22304c;
+  border-radius: 15px;
+  border: 8px solid #16203a;
+}
+
+.box:hover {
+  width: 450px;
+  height: 500px;
+}
+
+.box:hover .login {
+  inset: 40px;
+}
+
+.box:hover .loginBx {
+  transform: translateY(0px);
+}
+
+.login {
+  position: absolute;
+  inset: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #ffffff22;
+  color: #fff;
+  z-index: 1000;
+  box-shadow: 0 10px 20px #0002;
+  border-bottom: 2px solid #b6bedf80;
+  backdrop-filter: blur(2px);
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.loginBx {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 70%;
+  transform: translateY(126px);
+  transition: 0.5s;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+h3 i {
+  color: #283971;
+  text-shadow: 0 0 5px #ffffff, 0 0 20px #ffffff;
+}
+
+input {
+  width: 90%;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  font-size: 1em;
+  background: #ffffff19;
+  color: #fff;
+  border: 2px solid #b6bedf;
+  border-radius: 30px;
+  margin-bottom: 25px;
+}
+
+input::placeholder {
+  color: #b0b8d5; 
+}
+
+input[type="submit"] {
+  background: #19243d70;
+  border: none;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s;
+  box-shadow: #b21f2d31;
+}
+
+input[type="submit"]:hover {
+  background: #283971;
+  box-shadow: 0 0px 10px #111935, 0 0 60px #111935;
+}
+.icon {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 3em;
+  color: #fff;
+  background: #29416e66;
+  border-radius: 50%;
+  padding: 18px;
+  box-shadow: 0 0 18px #19243d70;
+}
+
+.group {
+  background: #19243d70;
+  border: none;
+  font-weight: 500;
+  color: #55C3F0;
+  cursor: pointer;
+  transition: 0.5s;
+  box-shadow: #b21f2d31;
+  width: 245px;
+  height: 40px;
+  border-radius: 30px;
+}
+.group:hover {
+  background: #55C3F0;
+  box-shadow: 0 0px 10px #2d647a, 0 0 60px #2d5f73;
+}
+
+.group a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/* إخفاء أسهم حقول الإدخال ذات النوع "number" */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* إزالة المظهر الافتراضي */
+    margin: 0; /* إزالة أي هوامش متبقية */
+}
+
+.message-box {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    transition: opacity 0.5s ease-out, height 0.5s ease-out, padding 0.5s ease-out, margin 0.5s ease-out;
+    overflow: hidden;
+    height: auto; 
+    opacity: 1; 
+}
+
+.error-message {
+    background-color: #f8d7da; /* لون خلفية الخطأ */
+    color: #721c24; /* لون نص الخطأ */
+    border: 1px solid #f5c6cb;
+}
+
+.success-message {
+    background-color: #d4edda; /* لون خلفية النجاح */
+    color: #155724; /* لون نص النجاح */
+    border: 1px solid #c3e6cb;
+}
+/* Responsive */
+@media (max-width: 500px) {
+  .box {
+    width: 98vw;
+    height: 98vw;
+    min-width: 250px;
+    min-height: 320px;
+  }
+}

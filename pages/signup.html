@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up – YIC Library</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="/assets/css/singup.css">
+</head>
+
+
+
+<body>
+    <header>
+  <img src="/assets/images/logo.png" alt="YIC Logo">
+</header>
+  <div class="overlay"></div>
+
+  <div class="box">
+    <div class="login">
+      <div class="loginBx">
+
+        <h3>
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Create
+          <i class="fa-solid fa-book-open"></i><br>
+          <span>ACCOUNT</span>
+        </h3>
+
+        <!-- Message box -->
+        <div id="messageBox" class="message-box" style="display:none;"></div>
+
+        <form id="signupForm" method="POST" action="signup_processor.php">
+
+          <input class="s" type="text"     name="username" placeholder="Full Name"  required>
+          <input class="s" type="email"    name="email"    placeholder="Email"       required>
+          <input class="s" type="number"   name="ID"       placeholder="Usee ID"  required>
+          <input class="s" type="password" name="Password" placeholder="Password"    required>
+
+          <div class="x">
+            <input class="h" type="submit" value="Sign Up">
+            <a href="/pages/books.html" class="n">Sign In</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/signup.js"></script>
+</body>
+</html>

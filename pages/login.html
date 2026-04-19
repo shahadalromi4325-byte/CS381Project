@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – YIC Library</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="/assets/css/login.css">
+</head>
+<header>
+   <img src="/assets/images/logo.png"> 
+</header>
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="box">
+    <div class="login">
+      <div class="loginBx">
+
+        <h3>
+         <center><i class="fa-solid fa-right-to-bracket"></i>
+          Welcome
+          <i class="fa-solid fa-book-open"></i><br>
+          <span>BACK</span></center>
+        </h3>
+
+        <!-- Message box: shown by JS after PHP redirect -->
+        <div id="messageBox" class="message-box" style="display:none;"></div>
+
+        <form id="loginForm" method="POST" action="checkLogin.php">
+          <input type="number" name="student_id" placeholder="User ID" required>
+          <input type="password" name="password"   placeholder="Password"   required>
+          <input type="submit" value="Sign In">
+          <div class="group">
+            <a href="/pages/signup.html"><center>Sign up</center></a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/login.js"></script>
+</body>
+</html>
