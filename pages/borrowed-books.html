@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Borrowed Books - Digital Library</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="styles.css">
+     <link rel="stylesheet" href="/assets/css/borrowed-books.css">
+
+</head>
+<body>
+    <!-- Background -->
+    <img src="https://images.unsplash.com/photo-150784272343-583f20270319?w=1920&h=1080&fit=crop" alt="library background" class="hero-gif">
+    <div class="overlay"></div>
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="https://via.placeholder.com/100?text=Library" alt="Library Logo" class="logo-img">
+    </div>
+
+    <!-- Profile Circle -->
+    <div class="profile-circle" id="profileCircle">
+        <a class="link" href="#" id="profileLink">
+            <i class="fas fa-user icon-profile"></i>
+        </a>
+    </div>
+
+    <!-- Profile Dropdown Menu -->
+    <div class="profile-info" id="profileInfo" style="display: none;">
+        <p id="welcomeMsg">Welcome, Guest</p>
+        <a href="profile.html" id="dashboardLink" style="display: none;">Profile</a>
+        <a href="borrowed-books.html" id="borrowedLink" style="display: none;">My Books</a>
+        <button id="logoutBtn" style="display: none;" class="logout-btn">Logout</button>
+        <a href="profile.html" id="loginLink">Login / Sign Up</a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-links">
+        <ul>
+            <li><a class="links" href="index.html"><i class="fas fa-home icon-home"></i>Home</a></li>
+            <li><a class="links" href="books.html"><i class="fas fa-book icon-books"></i>Books</a></li>
+            <li><a class="links" href="ebooks.html"><i class="fas fa-book-reader icon-ebooks"></i>E-Books</a></li>
+            <li><a class="links" href="index.html#services"><i class="fas fa-cogs icon-eservices"></i>Services</a></li>
+            <li><a class="links" href="index.html#help"><i class="fas fa-question-circle icon-help"></i>Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Login Required (shown when not logged in) -->
+    <div id="loginRequired" class="borrowed-container login-required" style="display: none;">
+        <h2>🔐 Log In to View Your Books</h2>
+        <p>You need to be logged in to see your borrowed books.</p>
+        <button class="login-btn" onclick="window.location.href='profile.html'">Go to Login</button>
+    </div>
+
+    <!-- Borrowed Books Container (shown when logged in) -->
+    <div id="borrowedContent" class="borrowed-container" style="display: none;">
+        <h1>📚 My Borrowed Books</h1>
+        <div class="borrowed-count">
+            <span id="borrowCount">You have 0 borrowed books</span>
+        </div>
+
+        <div id="borrowedList" class="borrowed-list">
+            <!-- Borrowed books will be populated here -->
+        </div>
+
+        <div id="noBorrowed" class="no-borrowed">
+            <p>📭 You haven't borrowed any books yet.</p>
+            <p>Visit the <a href="books.html">Books Catalog</a> to find and borrow books!</p>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+    <script>
+        function isOverdue(dueDate) {
+            return new Date(dueDate) < new Date();
+        }
+
+        function daysUntilDue(dueDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const due = new Date(dueDate);
+            due.setHours(0, 0, 0, 0);
+            const diffTime = due - today;
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+
+        function displayBorrowedBooks() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            const loginRequired = document.getElementById('loginRequired');
+            const borrowedContent = document.getElementById('borrowedContent');
+            const borrowedList = document.getElementById('borrowedList');
+            const noBorrowed = document.getElementById('noBorrowed');
+            const borrowCount = document.getElementById('borrowCount');
+
+            if (!user) {
+                loginRequired.style.display = 'block';
+                borrowedContent.style.display = 'none';
+                return;
+            }
+
+            loginRequired.style.display = 'none';
+            borrowedContent.style.display = 'block';
+
+            let borrowedBooks = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+            borrowedBooks = borrowedBooks.filter(b => b.userId === user.id);
+
+            borrowCount.textContent = `You have ${borrowedBooks.length} borrowed book${borrowedBooks.length !== 1 ? 's' : ''}`;
+
+            if (borrowedBooks.length === 0) {
+                borrowedList.innerHTML = '';
+                noBorrowed.style.display = 'block';
+                return;
+            }
+
+            noBorrowed.style.display = 'none';
+            borrowedList.innerHTML = '';
+
+            borrowedBooks.forEach((book, index) => {
+                const daysLeft = daysUntilDue(book.dueDate);
+                const overdue = isOverdue(book.dueDate);
+                const dueSoon = daysLeft <= 3 && daysLeft > 0;
+
+                const item = document.createElement('div');
+                item.className = 'borrowed-item';
+                item.innerHTML = `
+                    <div class="borrowed-info">
+                        <div class="borrowed-title">${book.title}</div>
+                        <div class="borrowed-detail">
+                            <span class="detail-label">Borrowed:</span> ${book.borrowDate}
+                        </div>
+                        <div class="borrowed-detail">
+                            <span class="detail-label">Due Date:</span> 
+                            <span class="${overdue ? 'overdue' : dueSoon ? 'due-soon' : ''}">
+                                ${book.dueDate}
+                                ${overdue ? ' (OVERDUE!)' : dueSoon ? ` (${daysLeft} day${daysLeft !== 1 ? 's' : ''} left)` : ''}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="borrowed-actions">
+                        <button class="return-btn" onclick="returnBook(${index})">
+                            ✓ Return Book
+                        </button>
+                        <button class="renew-btn" onclick="renewBook(${index})">
+                            🔄 Renew (14 days)
+                        </button>
+                    </div>
+                `;
+                borrowedList.appendChild(item);
+            });
+        }
+
+        function returnBook(index) {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            let borrowedBooks = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+            borrowedBooks = borrowedBooks.filter(b => b.userId === user.id);
+
+            const bookToReturn = borrowedBooks[index];
+            
+            // Remove from all borrowed books
+            let allBorrowed = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+            allBorrowed = allBorrowed.filter(b => !(b.id === bookToReturn.id && b.userId === user.id));
+            
+            localStorage.setItem('borrowedBooks', JSON.stringify(allBorrowed));
+
+            showSuccessToast(`"${bookToReturn.title}" has been returned successfully!`);
+            
+            setTimeout(() => {
+                displayBorrowedBooks();
+            }, 500);
+        }
+
+        function renewBook(index) {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            let borrowedBooks = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
+            const userBooks = borrowedBooks.filter(b => b.userId === user.id);
+            const bookToRenew = userBooks[index];
+
+            // Update due date (add 14 days)
+            const newDueDate = new Date(bookToRenew.dueDate);
+            newDueDate.setDate(newDueDate.getDate() + 14);
+
+            // Find and update the book
+            borrowedBooks = borrowedBooks.map(b => {
+                if (b.id === bookToRenew.id && b.userId === user.id) {
+                    return {
+                        ...b,
+                        dueDate: newDueDate.toLocaleDateString()
+                    };
+                }
+                return b;
+            });
+
+            localStorage.setItem('borrowedBooks', JSON.stringify(borrowedBooks));
+
+            showSuccessToast(`"${bookToRenew.title}" renewed until ${newDueDate.toLocaleDateString()}`);
+            
+            setTimeout(() => {
+                displayBorrowedBooks();
+            }, 500);
+        }
+
+        function showSuccessToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'success-toast';
+            toast.innerHTML = `✅ ${message}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            displayBorrowedBooks();
+        });
+    </script>
+</body>
+</html>
