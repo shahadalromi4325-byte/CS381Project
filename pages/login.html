@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
   <link rel="stylesheet" href="/assets/css/login.css">
 </head>
-<header>
-   <img src="/assets/images/logo.png"> 
-</header>
+
 <body>
+  <header>
+    <img src="/assets/images/logo.png" alt="YIC Library Logo">
+  </header>
 
   <div class="overlay"></div>
 
@@ -19,21 +20,21 @@
       <div class="loginBx">
 
         <h3>
-         <center><i class="fa-solid fa-right-to-bracket"></i>
+          <i class="fa-solid fa-right-to-bracket"></i>
           Welcome
           <i class="fa-solid fa-book-open"></i><br>
-          <span>BACK</span></center>
+          <span><center>BACK</center></span>
         </h3>
 
         <!-- Message box: shown by JS after PHP redirect -->
         <div id="messageBox" class="message-box" style="display:none;"></div>
 
-        <form id="loginForm" method="POST" action="checkLogin.php">
+        <form id="loginForm" method="POST" action="/backend/login.php">
           <input type="number" name="student_id" placeholder="User ID" required>
-          <input type="password" name="password"   placeholder="Password"   required>
+          <input type="password" name="password" placeholder="Password" required>
           <input type="submit" value="Sign In">
           <div class="group">
-            <a href="/pages/signup.html"><center>Sign up</center></a>
+            <a href="/pages/signup.html">Sign up</a>
           </div>
         </form>
 

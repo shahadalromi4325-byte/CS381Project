@@ -214,6 +214,15 @@ input[type="submit"]:hover {
   width: 245px;
   height: 40px;
   border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.group a {
+  width: 100%;
+  text-align: center;
+  display: block;
+  line-height: 40px;
 }
 .group:hover {
   background: #55C3F0;

@@ -203,8 +203,8 @@ input.h {
 }
 
 input.h:hover {
-  background: #a81c2a;
-  box-shadow: 0 0 10px #8c1823, 0 0 40px #8c1823;
+  background: #283971;
+  box-shadow: 0 0 10px #111935, 0 0 40px #111935;
 }
 
 /* Sign In link (styled like a button) */

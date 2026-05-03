@@ -1,112 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Books - Digital Library</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
-    <link rel="stylesheet" href="styles.css">
-          <link rel="stylesheet" href="/assets/css/ebooks.css">
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Books – YIC Library</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <!-- ✅ Fixed: was "ebooks.css" (lowercase) but file is named "Ebooks.css" -->
+  <link rel="stylesheet" href="/assets/css/Ebooks.css">
 </head>
+
 <body>
-    <!-- Background -->
-    <img src="https://images.unsplash.com/photo-150784272343-583f20270319?w=1920&h=1080&fit=crop" alt="library background" class="hero-gif">
-    <div class="overlay"></div>
+  <!-- ✅ Fixed: replaced broken Unsplash URL with local gif -->
+  <img src="/assets/images/animation.gif" alt="library background" class="hero-gif">
+  <div class="overlay"></div>
 
-    <!-- Logo -->
-    <div class="logo">
-        <img src="https://via.placeholder.com/100?text=Library" alt="Library Logo" class="logo-img">
+  <!-- Logo -->
+  <!-- ✅ Fixed: replaced broken placeholder URL with real logo path -->
+  <div class="logo">
+    <img src="/assets/images/logo.png" alt="YIC Library Logo" class="logo-img">
+  </div>
+
+  <!-- Profile Circle -->
+  <!-- ✅ Fixed: removed broken auth.js dropdown — simplified to login link -->
+  <div class="profile-circle">
+    <a class="link" href="/pages/login.html">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+
+  <!-- Navigation Bar -->
+  <!-- ✅ Fixed: all hrefs use absolute /pages/ paths -->
+  <nav class="nav-links">
+    <ul>
+      <li><a class="links" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a class="links" href="/pages/books.html"><i class="fas fa-book"></i> Books</a></li>
+      <li><a class="links active" href="/pages/Ebooks.html"><i class="fas fa-book-reader icon-ebooks"></i> E-Books</a></li>
+      <li><a class="links" href="/index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+      <li><a class="links" href="/pages/borrowed-books.html"><i class="fas fa-bookmark"></i> My Books</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="ebook-intro-container">
+    <h1>📚 E-Books Digital Library</h1>
+    <h3>Browse our special collections or dive into the full catalog!</h3>
+
+    <!-- ✅ Fixed: ebooks-catalog.html link kept (page to be created in Phase 2) -->
+    <a href="/pages/ebooks-catalog.html">
+      <button class="btn-full-catalog">
+        <i class="fas fa-search"></i>
+        Browse Full Catalog &amp; Search
+      </button>
+    </a>
+
+    <div class="ebook-section-title">✨ Featured Collections</div>
+    <div class="collections-grid">
+      <div class="collection-card" onclick="location.href='/pages/ebooks-catalog.html?category=award'">
+        <span class="collection-icon">🏆</span>
+        <div class="collection-name">Award Winners</div>
+        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Award-winning books and publications</p>
+      </div>
+
+      <div class="collection-card" onclick="location.href='/pages/ebooks-catalog.html?category=science'">
+        <span class="collection-icon">🔬</span>
+        <div class="collection-name">Science &amp; Tech</div>
+        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Latest in science and technology</p>
+      </div>
+
+      <div class="collection-card" onclick="location.href='/pages/ebooks-catalog.html?category=arts'">
+        <span class="collection-icon">🎨</span>
+        <div class="collection-name">Arts &amp; Culture</div>
+        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Creative works and cultural studies</p>
+      </div>
     </div>
 
-    <!-- Profile Circle -->
-    <div class="profile-circle" id="profileCircle">
-        <a class="link" href="#" id="profileLink">
-            <i class="fas fa-user icon-profile"></i>
-        </a>
+    <div class="ebook-section-title">⭐ Recommended For You</div>
+    <div class="recommendations-grid">
+      <div class="recommendation-card" onclick="location.href='/pages/ebooks-catalog.html?sort=recent'">
+        <span class="recommendation-icon">📚</span>
+        <div class="recommendation-name">Recently Added</div>
+        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Latest additions to our library</p>
+      </div>
+
+      <div class="recommendation-card" onclick="location.href='/pages/ebooks-catalog.html?sort=popular'">
+        <span class="recommendation-icon">⭐</span>
+        <div class="recommendation-name">Most Popular</div>
+        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Trending this month</p>
+      </div>
+
+      <div class="recommendation-card" onclick="location.href='/pages/ebooks-catalog.html?sort=trending'">
+        <span class="recommendation-icon">🔥</span>
+        <div class="recommendation-name">Trending Now</div>
+        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">What everyone is reading</p>
+      </div>
     </div>
+  </div>
 
-    <!-- Profile Dropdown Menu -->
-    <div class="profile-info" id="profileInfo" style="display: none;">
-        <p id="welcomeMsg">Welcome, Guest</p>
-        <a href="profile.html" id="dashboardLink" style="display: none;">Profile</a>
-        <a href="borrowed-books.html" id="borrowedLink" style="display: none;">My Books</a>
-        <button id="logoutBtn" style="display: none;" class="logout-btn">Logout</button>
-        <a href="profile.html" id="loginLink">Login / Sign Up</a>
-    </div>
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top show" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-    <!-- Navigation Bar -->
-    <nav class="nav-links">
-        <ul>
-            <li><a class="links" href="index.html"><i class="fas fa-home icon-home"></i>Home</a></li>
-            <li><a class="links" href="books.html"><i class="fas fa-book icon-books"></i>Books</a></li>
-            <li><a class="links active" href="ebooks.html"><i class="fas fa-book-reader icon-ebooks"></i>E-Books</a></li>
-            <li><a class="links" href="index.html#services"><i class="fas fa-cogs icon-eservices"></i>Services</a></li>
-            <li><a class="links" href="index.html#help"><i class="fas fa-question-circle icon-help"></i>Help</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="ebook-intro-container">
-        <h1>📚 E-Books Digital Library</h1>
-        <h3>Browse our special collections or dive into the full catalog!</h3>
-        
-        <a href="ebooks-catalog.html">
-            <button class="btn-full-catalog">
-                <i class="fas fa-search"></i>
-                Browse Full Catalog & Search
-            </button>
-        </a>
-
-        <div class="ebook-section-title">✨ Featured Collections</div>
-        <div class="collections-grid">
-            <div class="collection-card" onclick="window.location.href='ebooks-catalog.html?category=award'">
-                <span class="collection-icon">🏆</span>
-                <div class="collection-name">Award Winners</div>
-                <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Award-winning books and publications</p>
-            </div>
-            
-            <div class="collection-card" onclick="window.location.href='ebooks-catalog.html?category=science'">
-                <span class="collection-icon">🔬</span>
-                <div class="collection-name">Science & Tech</div>
-                <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Latest in science and technology</p>
-            </div>
-            
-            <div class="collection-card" onclick="window.location.href='ebooks-catalog.html?category=arts'">
-                <span class="collection-icon">🎨</span>
-                <div class="collection-name">Arts & Culture</div>
-                <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Creative works and cultural studies</p>
-            </div>
-        </div>
-        
-        <div class="ebook-section-title">⭐ Recommended For You</div>
-        <div class="recommendations-grid">
-            <div class="recommendation-card" onclick="window.location.href='ebooks-catalog.html?sort=recent'">
-                <span class="recommendation-icon">📚</span>
-                <div class="recommendation-name">Recently Added</div>
-                <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Latest additions to our library</p>
-            </div>
-            
-            <div class="recommendation-card" onclick="window.location.href='ebooks-catalog.html?sort=popular'">
-                <span class="recommendation-icon">⭐</span>
-                <div class="recommendation-name">Most Popular</div>
-                <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Trending this month</p>
-            </div>
-
-            <div class="recommendation-card" onclick="window.location.href='ebooks-catalog.html?sort=trending'">
-                <span class="recommendation-icon">🔥</span>
-                <div class="recommendation-name">Trending Now</div>
-                <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">What everyone is reading</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTopBtn">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <script src="auth.js"></script>
-    <script src="app.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 300);
+    });
+  </script>
 </body>
 </html>

@@ -8,12 +8,11 @@
   <link rel="stylesheet" href="/assets/css/singup.css">
 </head>
 
-
-
 <body>
-    <header>
-  <img src="/assets/images/logo.png" alt="YIC Logo">
-</header>
+  <header>
+    <img src="/assets/images/logo.png" alt="YIC Logo">
+  </header>
+
   <div class="overlay"></div>
 
   <div class="box">
@@ -30,18 +29,18 @@
         <!-- Message box -->
         <div id="messageBox" class="message-box" style="display:none;"></div>
 
-        <form id="signupForm" method="POST" action="signup_processor.php">
-
-          <input class="s" type="text"     name="username" placeholder="Full Name"  required>
-          <input class="s" type="email"    name="email"    placeholder="Email"       required>
-          <input class="s" type="number"   name="ID"       placeholder="Usee ID"  required>
-          <input class="s" type="password" name="Password" placeholder="Password"    required>
+        <form id="signupForm" method="POST" action="/backend/signup.php">
+          <input class="s" type="text"     name="username" placeholder="Full Name"   required>
+          <input class="s" type="email"    name="email"    placeholder="Email"        required>
+          <!-- ✅ Fixed: typo "Usee ID" → "User ID" -->
+          <input class="s" type="number"   name="ID"       placeholder="User ID"      required>
+          <input class="s" type="password" name="Password" placeholder="Password"     required>
 
           <div class="x">
             <input class="h" type="submit" value="Sign Up">
-            <a href="/pages/books.html" class="n">Sign In</a>
+            <!-- ✅ Fixed: was linking to /pages/books.html — should go to login -->
+            <a href="/pages/login.html" class="n">Sign In</a>
           </div>
-
         </form>
 
       </div>

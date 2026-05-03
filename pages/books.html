@@ -1,339 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books Catalog - Digital Library</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
-    <link rel="stylesheet" href="styles.css">
-      <link rel="stylesheet" href="/assets/css/books.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books Catalog – YIC Library</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/books.css">
 </head>
+
 <body>
-    <!-- Background -->
-    <img src="https://images.unsplash.com/photo-150784272343-583f20270319?w=1920&h=1080&fit=crop" alt="library background" class="hero-gif">
-    <div class="overlay"></div>
+  <!-- Background -->
+  <img src="/assets/images/Video.webm" alt="library background" class="hero-gif">
+  <div class="overlay"></div>
 
-    <!-- Logo -->
-    <div class="logo">
-        <img src="https://via.placeholder.com/100?text=Library" alt="Library Logo" class="logo-img">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="/assets/images/logo.png" alt="YIC Library Logo" class="logo-img">
+  </div>
+
+  <!-- Profile Circle -->
+  <!-- ✅ Fixed: removed broken profile dropdown (uses auth.js that doesn't exist) -->
+  <!--           replaced with simple login link like index.html -->
+  <div class="profile-circle">
+    <a class="link" href="/pages/login.html">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+
+  <!-- Navigation Bar -->
+  <!-- ✅ Fixed: all hrefs corrected to use absolute /pages/ paths -->
+  <nav class="nav-links">
+    <ul>
+      <li><a class="links" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a class="links active" href="/pages/books.html"><i class="fas fa-book"></i> Books</a></li>
+      <li><a class="links" href="/pages/Ebooks.html"><i class="fas fa-book-reader"></i> E-Books</a></li>
+      <li><a class="links" href="/index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+      <li><a class="links" href="/pages/borrowed-books.html"><i class="fas fa-bookmark"></i> My Books</a></li>
+    </ul>
+  </nav>
+
+  <!-- Catalog Container -->
+  <div class="books-catalog-container">
+    <h1><i class="fas fa-book"></i> Books Catalog</h1>
+
+    <!-- Search & Filter Bar -->
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search books by title, author, or ISBN..."
+        class="search-input"
+        onkeyup="filterBooks()"
+      >
+      <select id="categoryFilter" class="filter-select" onchange="filterBooks()">
+        <option value="">All Categories</option>
+        <option value="fiction">Fiction</option>
+        <option value="reference">Reference</option>
+        <option value="science">Science</option>
+        <option value="biography">Biography</option>
+        <option value="history">History</option>
+      </select>
     </div>
 
-    <!-- Profile Circle -->
-    <div class="profile-circle" id="profileCircle">
-        <a class="link" href="#" id="profileLink">
-            <i class="fas fa-user icon-profile"></i>
-        </a>
+    <div class="results-info">
+      <span id="resultCount">Showing all books</span>
     </div>
 
-    <!-- Profile Dropdown Menu -->
-    <div class="profile-info" id="profileInfo" style="display: none;">
-        <p id="welcomeMsg">Welcome, Guest</p>
-        <a href="profile.html" id="dashboardLink" style="display: none;">Profile</a>
-        <a href="borrowed-books.html" id="borrowedLink" style="display: none;">My Books</a>
-        <button id="logoutBtn" style="display: none;" class="logout-btn">Logout</button>
-        <a href="profile.html" id="loginLink">Login / Sign Up</a>
+    <!-- Books Grid -->
+    <div class="books-grid" id="booksContainer"></div>
+
+    <div id="noResults" class="no-results" style="display:none;">
+      <p>No books found. Try adjusting your search or filter.</p>
     </div>
+  </div>
 
-    <!-- Navigation Bar -->
-    <nav class="nav-links">
-        <ul>
-            <li><a class="links" href="index.html"><i class="fas fa-home icon-home"></i>Home</a></li>
-            <li><a class="links active" href="books.html"><i class="fas fa-book icon-books"></i>Books</a></li>
-            <li><a class="links" href="ebooks.html"><i class="fas fa-book-reader icon-ebooks"></i>E-Books</a></li>
-            <li><a class="links" href="index.html#services"><i class="fas fa-cogs icon-eservices"></i>Services</a></li>
-            <li><a class="links" href="index.html#help"><i class="fas fa-question-circle icon-help"></i>Help</a></li>
-        </ul>
-    </nav>
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-    <!-- Catalog Container -->
-    <div class="books-catalog-container">
-        <h1>📚 Books Catalog</h1>
-        
-        <!-- Search & Filter Bar -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search books by title, author, or ISBN..." class="search-input" onkeyup="filterBooks()">
-            <select id="categoryFilter" class="filter-select" onchange="filterBooks()">
-                <option value="">All Categories</option>
-                <option value="fiction">Fiction</option>
-                <option value="reference">Reference</option>
-                <option value="science">Science</option>
-                <option value="biography">Biography</option>
-                <option value="history">History</option>
-            </select>
-        </div>
-
-        <div class="results-info">
-            <span id="resultCount">Showing all books</span>
-        </div>
-
-        <!-- Books Grid -->
-        <div class="books-grid" id="booksContainer">
-            <!-- Books will be populated here by JavaScript -->
-        </div>
-
-        <div id="noResults" class="no-results" style="display: none;">
-            <p>No books found. Try adjusting your search or filter.</p>
-        </div>
-    </div>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTopBtn">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <script src="auth.js"></script>
-    <script src="app.js"></script>
-    <script>
-        // Sample books data (will be replaced with database later)
-        const booksData = [
-            {
-                id: 1,
-                title: "The Great Gatsby",
-                author: "F. Scott Fitzgerald",
-                category: "fiction",
-                callNumber: "PS3511.I4 G37 1925",
-                isbn: "978-0743273565",
-                cover: "https://images.unsplash.com/photo-1543002588-d0a9d0d1fa46?w=300&h=400&fit=crop",
-                quantity: 5,
-                available: 3
-            },
-            {
-                id: 2,
-                title: "To Kill a Mockingbird",
-                author: "Harper Lee",
-                category: "fiction",
-                callNumber: "PS3562.E3781 T6 1960",
-                isbn: "978-0061120084",
-                cover: "https://images.unsplash.com/photo-1507842217343-583f20270319?w=300&h=400&fit=crop",
-                quantity: 4,
-                available: 1
-            },
-            {
-                id: 3,
-                title: "A Brief History of Time",
-                author: "Stephen Hawking",
-                category: "science",
-                callNumber: "QB981 H37 1988",
-                isbn: "978-0553176842",
-                cover: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=300&h=400&fit=crop",
-                quantity: 3,
-                available: 2
-            },
-            {
-                id: 4,
-                title: "The Selfish Gene",
-                author: "Richard Dawkins",
-                category: "science",
-                callNumber: "QH366.2 D38 1976",
-                isbn: "978-0192860926",
-                cover: "https://images.unsplash.com/photo-1497206365907-3d71b9c9b0d6?w=300&h=400&fit=crop",
-                quantity: 2,
-                available: 2
-            },
-            {
-                id: 5,
-                title: "Pride and Prejudice",
-                author: "Jane Austen",
-                category: "fiction",
-                callNumber: "PR4034.P7 1993",
-                isbn: "978-0141439518",
-                cover: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=300&h=400&fit=crop",
-                quantity: 6,
-                available: 2
-            },
-            {
-                id: 6,
-                title: "The Oxford English Dictionary",
-                author: "Oxford University Press",
-                category: "reference",
-                callNumber: "PE1625 O9",
-                isbn: "978-0198611868",
-                cover: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&h=400&fit=crop",
-                quantity: 1,
-                available: 1
-            },
-            {
-                id: 7,
-                title: "Sapiens",
-                author: "Yuval Noah Harari",
-                category: "history",
-                callNumber: "GN281 H225 2014",
-                isbn: "978-0062316097",
-                cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&h=400&fit=crop",
-                quantity: 5,
-                available: 3
-            },
-            {
-                id: 8,
-                title: "Steve Jobs",
-                author: "Walter Isaacson",
-                category: "biography",
-                callNumber: "QA76.2 J63 2011",
-                isbn: "978-1451648537",
-                cover: "https://images.unsplash.com/photo-1507842217343-583f20270319?w=300&h=400&fit=crop",
-                quantity: 4,
-                available: 0
-            },
-            {
-                id: 9,
-                title: "The Art of War",
-                author: "Sun Tzu",
-                category: "history",
-                callNumber: "U101 S85",
-                isbn: "978-1590302256",
-                cover: "https://images.unsplash.com/photo-1543002588-d0a9d0d1fa46?w=300&h=400&fit=crop",
-                quantity: 3,
-                available: 2
-            },
-            {
-                id: 10,
-                title: "Clean Code",
-                author: "Robert C. Martin",
-                category: "science",
-                callNumber: "QA76.9 C6 M37 2008",
-                isbn: "978-0132350884",
-                cover: "https://images.unsplash.com/photo-1516979187457-635ffe35ff27?w=300&h=400&fit=crop",
-                quantity: 2,
-                available: 1
-            },
-            {
-                id: 11,
-                title: "The Da Vinci Code",
-                author: "Dan Brown",
-                category: "fiction",
-                callNumber: "PS3552 R685 D2 2003",
-                isbn: "978-0307474278",
-                cover: "https://images.unsplash.com/photo-1507842217343-583f20270319?w=300&h=400&fit=crop",
-                quantity: 5,
-                available: 2
-            },
-            {
-                id: 12,
-                title: "A Brief History of Nearly Everything",
-                author: "Bill Bryson",
-                category: "science",
-                callNumber: "QC61 B79 2003",
-                isbn: "978-0767908185",
-                cover: "https://images.unsplash.com/photo-1579783902614-e3fb5141b0cb?w=300&h=400&fit=crop",
-                quantity: 3,
-                available: 3
-            }
-        ];
-
-        function displayBooks(books) {
-            const container = document.getElementById('booksContainer');
-            const noResults = document.getElementById('noResults');
-            const resultCount = document.getElementById('resultCount');
-            const user = JSON.parse(localStorage.getItem('currentUser'));
-
-            container.innerHTML = '';
-
-            if (books.length === 0) {
-                noResults.style.display = 'block';
-                resultCount.innerHTML = 'No books found';
-                return;
-            }
-
-            noResults.style.display = 'none';
-            resultCount.innerHTML = `Showing ${books.length} book(s)`;
-
-            books.forEach(book => {
-                const availabilityClass = book.available === 0 ? 'unavailable' : book.available <= 2 ? 'low' : '';
-                const availabilityText = book.available === 0 ? 'Currently Unavailable' : 
-                                        book.available <= 2 ? `${book.available} In Stock` : 'In Stock';
-                
-                const card = document.createElement('div');
-                card.className = 'book-card';
-                card.innerHTML = `
-                    <img src="${book.cover}" alt="${book.title} Cover" class="book-cover" onerror="this.src='https://via.placeholder.com/300x400?text=${encodeURIComponent(book.title)}'">
-                    <div class="book-info">
-                        <div class="book-title">${book.title}</div>
-                        <div class="book-author">By: ${book.author}</div>
-                        <div class="book-call-number">Call: ${book.callNumber}</div>
-                        <div class="stock-info">${availabilityText}</div>
-                        <span class="availability ${availabilityClass}">${availabilityText}</span>
-                        ${user ? 
-                            `<button class="borrow-btn" ${book.available === 0 ? 'disabled' : ''} onclick="borrowBook(${book.id}, '${book.title}')">
-                                ${book.available === 0 ? '❌ Unavailable' : '📖 Borrow'}
-                            </button>` 
-                            : `<button class="borrow-btn" onclick="window.location.href='profile.html'">🔒 Log In</button>`
-                        }
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function borrowBook(bookId, bookTitle) {
-            const user = JSON.parse(localStorage.getItem('currentUser'));
-            if (!user) {
-                window.location.href = 'profile.html';
-                return;
-            }
-
-            // Get borrowed books from localStorage
-            let borrowedBooks = JSON.parse(localStorage.getItem('borrowedBooks')) || [];
-            
-            // Check if already borrowed
-            if (borrowedBooks.find(b => b.id === bookId && b.userId === user.id)) {
-                alert(`You have already borrowed "${bookTitle}"`);
-                return;
-            }
-
-            // Add borrowed book with due date (14 days from now)
-            const dueDate = new Date();
-            dueDate.setDate(dueDate.getDate() + 14);
-            
-            borrowedBooks.push({
-                id: bookId,
-                userId: user.id,
-                title: bookTitle,
-                borrowDate: new Date().toLocaleDateString(),
-                dueDate: dueDate.toLocaleDateString()
-            });
-
-            localStorage.setItem('borrowedBooks', JSON.stringify(borrowedBooks));
-
-            // Show success message
-            showSuccessToast(`"${bookTitle}" has been added to your borrowed books!`);
-
-            // Refresh display
-            setTimeout(() => {
-                filterBooks();
-            }, 500);
-        }
-
-        function showSuccessToast(message) {
-            const toast = document.createElement('div');
-            toast.className = 'success-toast';
-            toast.innerHTML = `✅ ${message}`;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-
-        function filterBooks() {
-            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-            const categoryFilter = document.getElementById('categoryFilter').value.toLowerCase();
-
-            const filtered = booksData.filter(book => {
-                const matchesSearch = book.title.toLowerCase().includes(searchQuery) || 
-                                    book.author.toLowerCase().includes(searchQuery) ||
-                                    book.isbn.includes(searchQuery);
-                const matchesCategory = !categoryFilter || book.category.toLowerCase() === categoryFilter;
-                return matchesSearch && matchesCategory;
-            });
-
-            displayBooks(filtered);
-        }
-
-        // Initialize on page load
-        window.addEventListener('load', () => {
-            displayBooks(booksData);
-        });
-    </script>
+  <script src="/assets/js/books.js"></script>
 </body>
 </html>

@@ -26,7 +26,7 @@
     <ul>
       <li><a class="links" href="#home"><i class="fas fa-home"></i> Home</a></li>
       <li><a class="links" href="#announcements"><i class="fas fa-bullhorn"></i> Announcements</a></li>
-      <li><a class="links" href="#Books"><i class="fas fa-book icon-books"></i> Books</a></li>
+      <li><a class="links" href="#popular"><i class="fas fa-book"></i> Books</a></li>
       <li><a class="links" href="#services"><i class="fas fa-cogs"></i> Services</a></li>
       <li><a class="links" href="#news"><i class="fas fa-newspaper"></i> News</a></li>
     </ul>
@@ -34,12 +34,13 @@
 
   <!-- ===== HERO ===== -->
   <section id="home" class="hero-section visible">
-   <img src="/assets/images/animation.gif" alt="University animation" class="hero-gif">
+    <img src="/assets/images/animation.webm" alt="University animation" class="hero-gif">
     <div class="contant">
       <h1>Welcome to<br>YIC University Library</h1>
       <p class="subtitle">Access thousands of academic resources, research papers,<br>and digital books from anywhere</p>
       <div class="button-group">
-        <button class="btn-primary" onclick="location.href='books.html'">Explore Books</button>
+        <!-- ✅ Fixed: was 'books.html' without path -->
+        <button class="btn-primary" onclick="location.href='/pages/books.html'">Explore Books</button>
         <button class="btn-secondary" onclick="location.href='/pages/login.html'">Login</button>
       </div>
     </div>
@@ -77,34 +78,35 @@
   </section>
 
   <!-- ===== POPULAR BOOKS ===== -->
+  <!-- ✅ Fixed: id was "popular" but nav linked to "#Books" — unified to #popular -->
   <section id="popular" class="popular-books">
     <div class="section-title"><i class="fas fa-fire"></i> Most Popular Books</div>
     <div class="books-grid">
-      <div class="book-card" onclick="location.href='books.html'">
+      <div class="book-card" onclick="location.href='/pages/books.html'">
         <div class="book-icon"><i class="fas fa-book"></i></div>
         <h4>Data Science 101</h4>
         <p>Dr. Ahmed Al-Rashid</p>
         <span class="availability"><i class="fas fa-check-circle"></i> 3 copies</span>
       </div>
-      <div class="book-card" onclick="location.href='books.html'">
+      <div class="book-card" onclick="location.href='/pages/books.html'">
         <div class="book-icon"><i class="fas fa-book"></i></div>
         <h4>Advanced Calculus</h4>
         <p>Prof. James Stewart</p>
         <span class="availability"><i class="fas fa-check-circle"></i> 2 copies</span>
       </div>
-      <div class="book-card" onclick="location.href='books.html'">
+      <div class="book-card" onclick="location.href='/pages/books.html'">
         <div class="book-icon"><i class="fas fa-book"></i></div>
         <h4>Python Programming</h4>
         <p>Eric Matthes</p>
         <span class="availability"><i class="fas fa-check-circle"></i> 5 copies</span>
       </div>
-      <div class="book-card" onclick="location.href='books.html'">
+      <div class="book-card" onclick="location.href='/pages/books.html'">
         <div class="book-icon"><i class="fas fa-book"></i></div>
         <h4>Ancient Egypt History</h4>
         <p>Dr. Zahi Hawass</p>
         <span class="availability low"><i class="fas fa-exclamation-circle"></i> 1 copy</span>
       </div>
-      <div class="book-card" onclick="location.href='books.html'">
+      <div class="book-card" onclick="location.href='/pages/books.html'">
         <div class="book-icon"><i class="fas fa-book"></i></div>
         <h4>Web Development</h4>
         <p>Jon Duckett</p>
@@ -117,25 +119,26 @@
   <section id="services" class="services-section">
     <div class="section-title"><i class="fas fa-cogs"></i> Library Services</div>
     <div class="services-grid">
-      <div class="service-card" onclick="location.href='books.html'">
+      <!-- ✅ Fixed: corrected all hrefs to use /pages/ prefix -->
+      <div class="service-card" onclick="location.href='/pages/books.html'">
         <i class="fas fa-search"></i>
         <h3>Search Books</h3>
         <p>Find any book in our catalog</p>
       </div>
-      <div class="service-card" onclick="location.href='Ebooks.jsp'">
+      <div class="service-card" onclick="location.href='/pages/Ebooks.html'">
         <i class="fas fa-tablet-alt"></i>
         <h3>E-Books</h3>
         <p>Access digital resources anytime</p>
       </div>
-      <div class="service-card" onclick="location.href='fines.html'">
+      <div class="service-card" onclick="location.href='/pages/fines.html'">
         <i class="fas fa-dollar-sign"></i>
         <h3>Pay Fines</h3>
         <p>Check and pay overdue fines</p>
       </div>
-      <div class="service-card" onclick="location.href='reservroom.jsp'">
-        <i class="fas fa-door-open"></i>
-        <h3>Study Rooms</h3>
-        <p>Reserve group study spaces</p>
+      <div class="service-card" onclick="location.href='/pages/borrowed-books.html'">
+        <i class="fas fa-book-reader"></i>
+        <h3>My Borrowed Books</h3>
+        <p>Track your borrowed books</p>
       </div>
     </div>
   </section>
