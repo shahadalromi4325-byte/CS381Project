@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pay Fines – YIC Library</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/fines.css">
+</head>
+
+<body>
+  <img src="/assets/images/animation.gif" alt="library background" class="hero-gif">
+  <div class="overlay"></div>
+
+  <div class="logo">
+    <img src="/assets/images/logo.png" alt="YIC Library Logo" class="logo-img">
+  </div>
+
+  <div class="profile-circle">
+    <a class="link" href="/pages/login.html">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+
+  <nav class="nav-links">
+    <ul>
+      <li><a class="links" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a class="links" href="/pages/books.html"><i class="fas fa-book"></i> Books</a></li>
+      <li><a class="links" href="/pages/Ebooks.html"><i class="fas fa-book-reader"></i> E-Books</a></li>
+      <li><a class="links" href="/index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a class="links" href="/pages/borrowed-books.html"><i class="fas fa-bookmark"></i> My Books</a></li>
+
+    </ul>
+  </nav>
+
+  <div class="fines-container">
+    <h1><i class="fas fa-file-invoice-dollar"></i> Outstanding Fines</h1>
+    
+    <div class="total-balance-card">
+      <span class="balance-label">Total Balance Due:</span>
+      <span class="balance-amount">$15.50</span>
+    </div>
+
+    <div class="fines-list">
+      <div class="fine-item">
+        <div class="fine-info">
+          <div class="fine-title">Introduction to Algorithms</div>
+          <p class="fine-detail"><span class="detail-label">Reason:</span> Overdue (5 days)</p>
+          <p class="fine-detail"><span class="detail-label">Due Date:</span> 2026-04-20</p>
+        </div>
+        <div class="fine-amount-section">
+          <span class="amount-tag">$7.50</span>
+          <button class="pay-btn-single">Pay Now</button>
+        </div>
+      </div>
+
+      <div class="fine-item">
+        <div class="fine-info">
+          <div class="fine-title">Database Systems: Design & Implementation</div>
+          <p class="fine-detail"><span class="detail-label">Reason:</span> Overdue (8 days)</p>
+          <p class="fine-detail"><span class="detail-label">Due Date:</span> 2026-04-15</p>
+        </div>
+        <div class="fine-amount-section">
+          <span class="amount-tag">$8.00</span>
+          <button class="pay-btn-single">Pay Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="noFines" class="no-fines" style="display:none;">
+      <p>🎉 Great job! You have no outstanding fines.</p>
+    </div>
+
+    <div class="payment-methods">
+      <h3>Quick Pay All</h3>
+      <div class="method-icons">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-apple-pay"></i>
+      </div>
+      <button class="pay-all-btn">Settle All Fines</button>
+    </div>
+  </div>
+
+  <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2><i class="fas fa-credit-card"></i> Payment Details</h2>
+        <p>Complete your transaction securely.</p>
+        
+        <form id="paymentForm">
+            <div class="input-group">
+                <label>Cardholder Name</label>
+                <input type="text" placeholder="John Doe" required>
+            </div>
+            <div class="input-group">
+                <label>Card Number</label>
+                <input type="text" placeholder="1234 5678 9101 1121" required>
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Expiry</label>
+                    <input type="text" placeholder="MM/YY" required>
+                </div>
+                <div class="input-group">
+                    <label>CVV</label>
+                    <input type="text" placeholder="123" required>
+                </div>
+            </div>
+            <button type="submit" class="confirm-pay-btn">Confirm Payment</button>
+        </form>
+    </div>
+  </div>
+
+  <div id="successToast" class="success-toast" style="display: none;">
+      <i class="fas fa-check-circle"></i> Payment Successful! Your balance has been updated.
+  </div>
+
+  <script src="/assets/js/fines.js"></script>
+</body>
+</html>

@@ -1,121 +1,129 @@
-.icon-ebooks { color: #b21f2d !important; }
-
-/* ── Main Container ── */
-.ebook-intro-container {
+/* Inherit base catalog styles */
+.books-catalog-container {
     width: 90%;
-    max-width: 1000px;
-    margin: 120px auto 60px;
-    padding: 40px;
-    background: rgba(31, 58, 107, 0.85);
+    max-width: 1200px;
+    margin: 120px auto 50px;
+    padding: 30px;
+    background: rgba(31, 58, 107, 0.75);
     border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     color: white;
     z-index: 10;
     position: relative;
-    text-align: center;
 }
 
-.ebook-intro-container h1 {
-    font-size: 2.4em;
+/* E-Book Specific Metadata */
+.ebook-specs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
     margin-bottom: 12px;
-    color: #fff;
+    font-size: 0.82em;
+    color: #cdd;
 }
 
-.ebook-intro-container h3 {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    opacity: 0.88;
-    font-weight: 400;
+.ebook-specs span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
 }
 
-/* ── Section Titles ── */
-.ebook-section-title {
-    font-size: 1.6em;
-    margin: 42px 0 28px;
-    color: #f0f0f0;
-    border-bottom: 2px solid #b21f2d;
-    padding-bottom: 10px;
-    text-align: center;
+.ebook-specs i {
+    color: #ffeb3b;
+    margin-right: 4px;
 }
 
-/* ── Full Catalog Button ── */
-.btn-full-catalog {
-    background: #b21f2d;
+/* Digital Action Button */
+.download-btn {
+    width: 100%;
+    padding: 10px 14px;
+    background: #28a745; /* Green for downloads */
     color: white;
     border: none;
-    font-size: 1.1em;
-    padding: 14px 38px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: inline-flex;
-    gap: 10px;
-    align-items: center;
-    font-family: inherit;
-}
-
-.btn-full-catalog:hover {
-    background: #8c1823;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(178, 31, 45, 0.45);
-}
-
-/* ── Collections Grid ── */
-.collections-grid,
-.recommendations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-/* ── Collection Card ── */
-.collection-card,
-.recommendation-card {
-    background: rgba(255, 255, 255, 0.09);
-    border-radius: 14px;
-    padding: 28px 20px;
-    text-align: center;
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.collection-card:hover,
-.recommendation-card:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-6px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
-}
-
-.collection-icon,
-.recommendation-icon {
-    font-size: 3.2em;
-    margin-bottom: 12px;
-    display: block;
-}
-video.hero {
-  position: fixed;
-  inset: 0;               /* shorthand for top/right/bottom/left: 0 */
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -2;
-}
-
-.collection-name,
-.recommendation-name {
-    font-size: 1.05em;
+    border-radius: 8px;
+    font-size: 0.95em;
     font-weight: 600;
-    margin-bottom: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-    .ebook-intro-container { width: 95%; padding: 25px 18px; }
-    .ebook-intro-container h1 { font-size: 1.8em; }
-    .collections-grid,
-    .recommendations-grid { grid-template-columns: 1fr; }
+.download-btn:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+/* Grid and Card reuse from books.css */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+.search-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 18px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 1em;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.search-input::placeholder { color: rgba(255,255,255,0.55); }
+.search-input:focus { border-color: rgba(255,255,255,0.7); }
+.filter-select {
+    padding: 12px 18px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.filter-select option { background: #1f3a6b; color: #fff; }
+.filter-select:focus  { border-color: rgba(255,255,255,0.7); }
+
+.results-info {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    opacity: 0.85;
+}
+
+.book-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 18px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.book-card:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-5px);
+}
+
+.book-cover {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    opacity: 0.7;
+    margin-bottom: 15px;
 }

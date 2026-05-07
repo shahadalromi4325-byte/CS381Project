@@ -6,106 +6,52 @@
   <title>E-Books – YIC Library</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <!-- ✅ Fixed: was "ebooks.css" (lowercase) but file is named "Ebooks.css" -->
   <link rel="stylesheet" href="/assets/css/Ebooks.css">
 </head>
 
 <body>
-  <!-- ✅ Fixed: replaced broken Unsplash URL with local gif -->
   <img src="/assets/images/animation.gif" alt="library background" class="hero-gif">
   <div class="overlay"></div>
 
-  <!-- Logo -->
-  <!-- ✅ Fixed: replaced broken placeholder URL with real logo path -->
   <div class="logo">
     <img src="/assets/images/logo.png" alt="YIC Library Logo" class="logo-img">
   </div>
 
-  <!-- Profile Circle -->
-  <!-- ✅ Fixed: removed broken auth.js dropdown — simplified to login link -->
   <div class="profile-circle">
     <a class="link" href="/pages/login.html">
       <i class="fas fa-user"></i>
     </a>
   </div>
 
-  <!-- Navigation Bar -->
-  <!-- ✅ Fixed: all hrefs use absolute /pages/ paths -->
   <nav class="nav-links">
     <ul>
       <li><a class="links" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
       <li><a class="links" href="/pages/books.html"><i class="fas fa-book"></i> Books</a></li>
-      <li><a class="links active" href="/pages/Ebooks.html"><i class="fas fa-book-reader icon-ebooks"></i> E-Books</a></li>
+      <li><a class="links active" href="/pages/Ebooks.html"><i class="fas fa-book-reader"></i> E-Books</a></li>
       <li><a class="links" href="/index.html#services"><i class="fas fa-cogs"></i> Services</a></li>
       <li><a class="links" href="/pages/borrowed-books.html"><i class="fas fa-bookmark"></i> My Books</a></li>
     </ul>
   </nav>
 
-  <!-- Main Content -->
-  <div class="ebook-intro-container">
-    <h1>📚 E-Books Digital Library</h1>
-    <h3>Browse our special collections or dive into the full catalog!</h3>
+  <div class="books-catalog-container">
+    <h1> E-Books Digital Library</h1>
 
-    <!-- ✅ Fixed: ebooks-catalog.html link kept (page to be created in Phase 2) -->
-    <a href="/pages/ebooks-catalog.html">
-      <button class="btn-full-catalog">
-        <i class="fas fa-search"></i>
-        Browse Full Catalog &amp; Search
-      </button>
-    </a>
-
-    <div class="ebook-section-title">✨ Featured Collections</div>
-    <div class="collections-grid">
-      <div class="collection-card" onclick="location.href='/pages/ebooks-catalog.html?category=award'">
-        <span class="collection-icon">🏆</span>
-        <div class="collection-name">Award Winners</div>
-        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Award-winning books and publications</p>
-      </div>
-
-      <div class="collection-card" onclick="location.href='/pages/ebooks-catalog.html?category=science'">
-        <span class="collection-icon">🔬</span>
-        <div class="collection-name">Science &amp; Tech</div>
-        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Latest in science and technology</p>
-      </div>
-
-      <div class="collection-card" onclick="location.href='/pages/ebooks-catalog.html?category=arts'">
-        <span class="collection-icon">🎨</span>
-        <div class="collection-name">Arts &amp; Culture</div>
-        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Creative works and cultural studies</p>
-      </div>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search by title, author, or category...">
+      
+      <select id="categoryFilter" class="filter-select">
+        <option value="">All Categories</option>
+        <option value="science">Science & Tech</option>
+        <option value="arts">Arts & Culture</option>
+        <option value="fiction">Fiction</option>
+        <option value="award">Award Winners</option>
+      </select>
     </div>
 
-    <div class="ebook-section-title">⭐ Recommended For You</div>
-    <div class="recommendations-grid">
-      <div class="recommendation-card" onclick="location.href='/pages/ebooks-catalog.html?sort=recent'">
-        <span class="recommendation-icon">📚</span>
-        <div class="recommendation-name">Recently Added</div>
-        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Latest additions to our library</p>
-      </div>
-
-      <div class="recommendation-card" onclick="location.href='/pages/ebooks-catalog.html?sort=popular'">
-        <span class="recommendation-icon">⭐</span>
-        <div class="recommendation-name">Most Popular</div>
-        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">Trending this month</p>
-      </div>
-
-      <div class="recommendation-card" onclick="location.href='/pages/ebooks-catalog.html?sort=trending'">
-        <span class="recommendation-icon">🔥</span>
-        <div class="recommendation-name">Trending Now</div>
-        <p style="font-size:0.9em;margin-top:10px;opacity:0.8;">What everyone is reading</p>
-      </div>
-    </div>
+    <div id="resultsInfo" class="results-info"></div>
+    <div id="ebooksGrid" class="books-grid"></div>
   </div>
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-top show" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <script>
-    window.addEventListener('scroll', () => {
-      document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 300);
-    });
-  </script>
+  <script src="/assets/js/Ebooks.js"></script>
 </body>
 </html>
