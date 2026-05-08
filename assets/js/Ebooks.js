@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ebooksData = [
-        { id: 101, title: "Advanced Web Development", author: "Shahad Ahmed", category: "science", format: "PDF", size: "4.2 MB", icon: "fa-file-code" },
-        { id: 102, title: "Modern Art History", author: "YIC Arts", category: "arts", format: "ePub", size: "2.8 MB", icon: "fa-palette" },
-        { id: 103, title: "The Quantum Realm", author: "Dr. Physics", category: "science", format: "PDF", size: "5.5 MB", icon: "fa-atom" },
-        { id: 104, title: "Classic Tales", author: "Storyteller", category: "fiction", format: "ePub", size: "1.2 MB", icon: "fa-book" }
-    ];
+    let ebooksData = []; // Data will be loaded here
+
+    async function loadEbooks() {
+        try {
+            const response = await fetch('/api/fetch_data.php?type=ebooks');
+            ebooksData = await response.json();
+            filterEbooks();
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
 
     const ebooksGrid = document.getElementById('ebooksGrid');
     const searchInput = document.getElementById('searchInput');
@@ -21,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'book-card';
             card.innerHTML = `
-                <div class="book-cover"><i class="fas ${book.icon}"></i></div>
+                <div class="book-cover"><i class="fas ${book.icon || 'fa-file-pdf'}"></i></div>
                 <div class="book-info">
                     <div class="book-title">${book.title}</div>
                     <p class="book-author">By ${book.author}</p>
@@ -29,11 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span><i class="fas fa-tag"></i> ${book.category}</span>
                         <span><i class="fas fa-hdd"></i> ${book.size}</span>
                     </div>
-                    <button class="download-btn" onclick="handleDownload('${book.title}', '${book.format}')">
+                    <button class="download-btn" onclick="handleDownload('${book.title.replace(/'/g, "\\'")}', '${book.format}')">
                         <i class="fas fa-download"></i> Download ${book.format}
                     </button>
-                </div>
-            `;
+                </div>`;
             ebooksGrid.appendChild(card);
         });
     }
@@ -44,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const filtered = ebooksData.filter(book => {
             const matchesSearch = book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query);
-            const matchesCategory = !category || book.category === category;
+            const matchesCategory = !category || book.category.toLowerCase() === category;
             return matchesSearch && matchesCategory;
         });
         displayEbooks(filtered);
@@ -52,13 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchInput.addEventListener('input', filterEbooks);
     categoryFilter.addEventListener('change', filterEbooks);
-    displayEbooks(ebooksData);
+    
+    loadEbooks();
 });
-
-function handleDownload(title, format) {
-    const toast = document.createElement('div');
-    toast.className = 'success-toast';
-    toast.innerHTML = `<i class="fas fa-check-circle"></i> Starting ${format} download for "${title}"`;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-}
