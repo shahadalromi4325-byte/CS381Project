@@ -29,27 +29,15 @@
         <!-- Message box: shown by JS after PHP redirect -->
         <div id="messageBox" class="message-box" style="display:none;"></div>
 
-        <!--
-          Fix 1: المسار نسبي صحيح من pages/ إلى backend/
-          Fix 2: field name = "email" يطابق login.php بالضبط
-          Fix 3: شلنا student_id لأن login.php يبحث بالـ email
-        -->
         <form id="loginForm" method="POST" action="../backend/login.php">
 
-          <div class="input-group">
-            <i class="fas fa-envelope"></i>
-            <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
-          </div>
-
-          <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
-          </div>
+          <input type="email"    name="email"    placeholder="Email Address" required autocomplete="email">
+          <input type="password" name="password" placeholder="Password"      required autocomplete="current-password">
 
           <input type="submit" value="Sign In">
 
           <div class="group">
-            <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+            <a href="signup.html">Sign up</a>
           </div>
 
         </form>

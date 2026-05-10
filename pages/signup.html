@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up – YIC Library</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/singup.css">
 </head>
 
@@ -28,31 +29,22 @@
 
         <!-- Message box -->
         <div id="messageBox" class="message-box" style="display:none;"></div>
+
+        <!--
+          Fix 1: المسار نسبي صحيح من pages/ إلى backend/
+          Fix 2: أسماء الـ fields: full_name, email, student_id, password
+                 (كانت: username, email, ID, Password — غير متسقة)
+        -->
         <form id="signupForm" method="POST" action="../backend/signup.php">
 
-          <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input class="s" type="text"     name="full_name"   placeholder="Full Name"      required autocomplete="name">
-          </div>
-
-          <div class="input-group">
-            <i class="fas fa-envelope"></i>
-            <input class="s" type="email"    name="email"       placeholder="Email Address"  required autocomplete="email">
-          </div>
-
-          <div class="input-group">
-            <i class="fas fa-id-card"></i>
-            <input class="s" type="number"   name="student_id"  placeholder="Student ID"     required>
-          </div>
-
-          <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input class="s" type="password" name="password"    placeholder="Password"       required autocomplete="new-password">
-          </div>
+          <input class="s" type="text"     name="full_name"   placeholder="Full Name"      required autocomplete="name">
+          <input class="s" type="email"    name="email"       placeholder="Email Address"  required autocomplete="email">
+          <input class="s" type="number"   name="student_id"  placeholder="Student ID"     required>
+          <input class="s" type="password" name="password"    placeholder="Password"       required autocomplete="new-password">
 
           <div class="x">
             <input class="h" type="submit" value="Sign Up">
-            <a href="login.html" class="n"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+            <a href="login.html" class="n">Sign In</a>
           </div>
 
         </form>

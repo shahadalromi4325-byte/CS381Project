@@ -11,10 +11,12 @@ include 'database/db_connection.php';
 
 $popularBooks = [];
 try {
+    // جيبي أكثر 5 كتب متاحة من جدول books
     $stmt = $pdo->prepare("SELECT id, title, author, available, quantity FROM books ORDER BY available DESC LIMIT 5");
     $stmt->execute();
     $popularBooks = $stmt->fetchAll();
 } catch (PDOException $e) {
+    // لو الاتصال فشل، نكمل بدون كتب (الصفحة ما تنكسر)
     $popularBooks = [];
 }
 ?>
@@ -36,19 +38,23 @@ try {
     <img class="logo-img" src="assets/images/logo.png" alt="YIC Library Logo">
   </div>
 
+  <!-- Profile: يتغير بناءً على حالة تسجيل الدخول -->
   <div class="profile-circle">
     <?php if ($isLoggedIn): ?>
       <?php if ($userRole === 'admin'): ?>
+        <!-- أدمن: روحي لـ dashboard -->
         <a href="pages/admin_dashboard.php" class="link" title="Admin Dashboard">
           <i class="fas fa-user-shield"></i>
         </a>
       <?php else: ?>
+        <!-- طالب/موظف: روحي للـ profile -->
         <a href="pages/dashboard.php" class="link" title="<?= $userName ?>">
           <i class="fas fa-user-circle"></i>
         </a>
       <?php endif; ?>
     <?php else: ?>
-      <a href="pages/login.php" class="link" title="Login">
+      <!-- غير مسجّل: روحي للـ login -->
+      <a href="pages/login.html" class="link" title="Login">
         <i class="fas fa-user"></i>
       </a>
     <?php endif; ?>
@@ -64,6 +70,7 @@ try {
       <li><a class="links" href="#news"><i class="fas fa-newspaper"></i> News</a></li>
 
       <?php if ($isLoggedIn): ?>
+        <!-- زر logout يظهر فقط لو مسجّل دخول -->
         <li>
           <a class="links" href="backend/logout.php" title="Logout">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -76,7 +83,7 @@ try {
   <!-- ===== HERO ===== -->
   <section id="home" class="hero-section visible">
 
-    <img class="hero-gif" src="assets/images/animation.webm" alt="Library Hero Image">
+    <img src="assets/images/animation.webm" alt="University animation" class="hero-gif">
 
     <div class="contant">
       <?php if ($isLoggedIn): ?>
@@ -91,14 +98,15 @@ try {
       </p>
 
       <div class="button-group">
-        <button class="btn-primary" onclick="location.href='pages/books.php'">Explore Books</button>
+        <button class="btn-primary" onclick="location.href='/pages/books.php'">Explore Books</button>
 
         <?php if ($isLoggedIn): ?>
-          <button class="btn-secondary" onclick="location.href='<?= $userRole === 'admin' ? 'pages/admin_dashboard.php' : 'pages/dashboard.php' ?>'">
+          <!-- لو مسجّل، الزر الثاني يروح للـ dashboard بدل login -->
+          <button class="btn-secondary" onclick="location.href='<?= $userRole === 'admin' ? '/pages/admin_dashboard.php' : '/pages/dashboard.php' ?>'">
             My Dashboard
           </button>
         <?php else: ?>
-          <button class="btn-secondary" onclick="location.href='pages/login.php'">Login</button>
+          <button class="btn-secondary" onclick="location.href='pages/login.html'">Login</button>
         <?php endif; ?>
       </div>
     </div>
@@ -142,7 +150,7 @@ try {
 
       <?php if (!empty($popularBooks)): ?>
         <?php foreach ($popularBooks as $book): ?>
-          <div class="book-card" onclick="location.href='pages/books.php'">
+          <div class="book-card" onclick="location.href='/pages/books.php'">
             <div class="book-icon"><i class="fas fa-book"></i></div>
             <h4><?= htmlspecialchars($book['title']) ?></h4>
             <p><?= htmlspecialchars($book['author']) ?></p>
@@ -168,7 +176,6 @@ try {
         <?php endforeach; ?>
 
       <?php else: ?>
-        <!-- لو الداتابيس فاضي أو فيه خطأ -->
         <p class="no-books">No books available at the moment.</p>
       <?php endif; ?>
 
@@ -179,38 +186,38 @@ try {
   <section id="services" class="services-section">
     <div class="section-title"><i class="fas fa-cogs"></i> Library Services</div>
     <div class="services-grid">
-      <div class="service-card" onclick="location.href='pages/books.php'">
+      <div class="service-card" onclick="location.href='/pages/books.php'">
         <i class="fas fa-search"></i>
         <h3>Search Books</h3>
         <p>Find any book in our catalog</p>
       </div>
-      <div class="service-card" onclick="location.href='pages/Ebooks.php'">
+      <div class="service-card" onclick="location.href='/pages/Ebooks.php'">
         <i class="fas fa-tablet-alt"></i>
         <h3>E-Books</h3>
         <p>Access digital resources anytime</p>
       </div>
 
       <?php if ($isLoggedIn): ?>
-        <div class="service-card" onclick="location.href='pages/fines.php'">
+        <div class="service-card" onclick="location.href='/pages/fines.php'">
           <i class="fas fa-dollar-sign"></i>
           <h3>Pay Fines</h3>
           <p>Check and pay overdue fines</p>
         </div>
-        <div class="service-card" onclick="location.href='pages/borrowed-books.php'">
+        <div class="service-card" onclick="location.href='/pages/borrowed-books.php'">
           <i class="fas fa-book-reader"></i>
           <h3>My Borrowed Books</h3>
           <p>Track your borrowed books</p>
         </div>
       <?php else: ?>
-        <div class="service-card locked" onclick="location.href='pages/login.php'" title="Login required">
+        <div class="service-card locked" onclick="location.href='pages/login.html'" title="Login required">
           <i class="fas fa-lock"></i>
           <h3>Pay Fines</h3>
           <p>Login to check your fines</p>
         </div>
-        <div class="service-card locked" onclick="location.href='pages/login.php'" title="Login required">
+        <div class="service-card locked" onclick="location.href='pages/login.html'" title="Login required">
           <i class="fas fa-lock"></i>
           <h3>My Borrowed Books</h3>
-          <p>Login to track your books</p>  
+          <p>Login to track your books</p>
         </div>
       <?php endif; ?>
     </div>
@@ -260,12 +267,14 @@ try {
       <form id="feedbackForm" novalidate>
         <div class="form-group">
           <label for="userName">Full Name</label>
+          <!-- ✅ لو مسجّل، الاسم يتعبّى تلقائياً -->
           <input type="text" id="userName" placeholder="Your full name"
                  value="<?= $isLoggedIn ? $userName : '' ?>" autocomplete="name">
           <span class="error-msg" id="nameError"></span>
         </div>
         <div class="form-group">
           <label for="userEmail">Email Address</label>
+          <!-- ✅ لو مسجّل، الإيميل يتعبّى تلقائياً -->
           <input type="email" id="userEmail" placeholder="your@email.com"
                  value="<?= $isLoggedIn ? htmlspecialchars($_SESSION['email']) : '' ?>" autocomplete="email">
           <span class="error-msg" id="emailError"></span>
@@ -295,5 +304,20 @@ try {
   </button>
 
   <script src="assets/js/main.js"></script>
+
+  <!-- CSS إضافي للـ locked cards -->
+  <style>
+    .service-card.locked {
+      opacity: 0.6;
+      cursor: pointer;
+      position: relative;
+    }
+    .service-card.locked:hover {
+      opacity: 0.85;
+    }
+    .availability.unavailable {
+      color: #e53e3e;
+    }
+  </style>
 </body>
 </html>

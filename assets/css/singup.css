@@ -111,7 +111,7 @@ body {
   position: absolute;
   inset: 60px;
   display: flex;
-  justify-content: center; /* ✅ Fixed: was "justify-content: top" — invalid */
+  justify-content: center; 
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
@@ -159,7 +159,6 @@ h3 i {
 }
 
 /* ========== INPUTS ========== */
-/* ✅ Removed "position: center" and "position: right" — both are invalid values */
 input.s {
   width: 100%;
   padding: 10px 20px;
@@ -174,7 +173,6 @@ input.s {
 
 input::placeholder { color: #dde0f4; }
 
-/* Hide number arrows */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 /* ========== BUTTON ROW ========== */
