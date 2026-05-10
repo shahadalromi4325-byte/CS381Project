@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login – YIC Library</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
-  <link rel="stylesheet" href="/assets/css/login.css">
+  <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 
 <body>
   <header>
-    <img src="/assets/images/logo.png" alt="YIC Library Logo">
+    <img src="../assets/images/logo.png" alt="YIC Library Logo">
   </header>
 
   <div class="overlay"></div>
@@ -23,25 +23,41 @@
           <i class="fa-solid fa-right-to-bracket"></i>
           Welcome
           <i class="fa-solid fa-book-open"></i><br>
-          <span><center>BACK</center></span>
+          <span>BACK</span>
         </h3>
 
         <!-- Message box: shown by JS after PHP redirect -->
         <div id="messageBox" class="message-box" style="display:none;"></div>
 
-        <form id="loginForm" method="POST" action="/backend/login.php">
-          <input type="number" name="student_id" placeholder="User ID" required>
-          <input type="password" name="password" placeholder="Password" required>
-          <input type="submit" value="Sign In">
-          <div class="group">
-            <a href="/pages/signup.html">Sign up</a>
+        <!--
+          Fix 1: المسار نسبي صحيح من pages/ إلى backend/
+          Fix 2: field name = "email" يطابق login.php بالضبط
+          Fix 3: شلنا student_id لأن login.php يبحث بالـ email
+        -->
+        <form id="loginForm" method="POST" action="../backend/login.php">
+
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
           </div>
+
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+          </div>
+
+          <input type="submit" value="Sign In">
+
+          <div class="group">
+            <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+          </div>
+
         </form>
 
       </div>
     </div>
   </div>
 
-  <script src="/assets/js/login.js"></script>
+  <script src="../assets/js/login.js"></script>
 </body>
 </html>

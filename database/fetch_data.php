@@ -1,20 +1,35 @@
 <?php
 include 'db_connection.php';
 
-$type = $_GET['type'] ?? 'books'; // Determine if we want physical books or ebooks
-$table = ($type === 'ebooks') ? 'ebooks' : 'books';
+header('Content-Type: application/json');
 
-$sql = "SELECT * FROM $table";
-$result = $conn->query($sql);
+// --- Input Validation ---
+// Only allow specific values to prevent SQL injection
+$allowed_types = ['books', 'ebooks'];
+$type = $_GET['type'] ?? 'books';
 
-$data = [];
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
+if (!in_array($type, $allowed_types)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid type. Must be "books" or "ebooks".']);
+    exit;
 }
 
-header('Content-Type: application/json');
-echo json_encode($data);
-$conn->close();
+$table = ($type === 'ebooks') ? 'ebooks' : 'books';
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM `$table` ORDER BY id ASC");
+    $stmt->execute();
+
+    $data = $stmt->fetchAll(); // PDO::FETCH_ASSOC is set globally
+
+    if (empty($data)) {
+        echo json_encode(['message' => 'No records found.', 'data' => []]);
+    } else {
+        echo json_encode(['data' => $data, 'count' => count($data)]);
+    }
+
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Failed to retrieve data.']);
+}
 ?>

@@ -1,16 +1,27 @@
 <?php
-include 'db_connection.php'; // Ensure path is correct
+include 'db_connection.php';
 
-// 1. Check if the table exists and columns match
+header('Content-Type: text/html; charset=utf-8');
+
+// Use a prepared statement — NEVER concatenate user data into SQL
 $sql = "INSERT INTO ebooks (title, author, category, format, size, icon) 
-        VALUES ('Advanced Web Development', 'Shahad Ahmed', 'science', 'PDF', '4.2 MB', 'fa-file-code')";
+        VALUES (:title, :author, :category, :format, :size, :icon)";
 
-if ($conn->query($sql) === TRUE) {
-    echo "✅ Success: New record created successfully";
-} else {
-    // 2. This will print the EXACT error from the database
-    echo "❌ Error: " . $sql . "<br>" . $conn->error;
+try {
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':title'    => 'Advanced Web Development',
+        ':author'   => 'Shahad Ahmed',
+        ':category' => 'Science',
+        ':format'   => 'PDF',
+        ':size'     => '4.2 MB',
+        ':icon'     => 'fa-file-code'
+    ]);
+
+    $newId = $pdo->lastInsertId();
+    echo "✅ Success: New record inserted with ID = " . $newId;
+
+} catch (PDOException $e) {
+    echo "❌ Error: " . $e->getMessage();
 }
-
-$conn->close();
 ?>

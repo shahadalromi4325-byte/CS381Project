@@ -14,9 +14,18 @@ body {
   color: white;
   overflow-x: hidden;
 }
-
+.service-card.locked {
+      opacity: 0.6;
+      cursor: pointer;
+      position: relative;
+    }
+    .service-card.locked:hover {
+      opacity: 0.85;
+    }
+    .availability.unavailable {
+      color: #e53e3e;
+    }
 /* ========== BACKGROUND VIDEO ========== */
-/* ✅ Removed duplicate .background wrapper div and second .backgraund overlay */
 img.hero-gif {
   position: fixed;
   inset: 0;               /* shorthand for top/right/bottom/left: 0 */

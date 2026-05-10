@@ -50,14 +50,13 @@ body {
   initial-value: 0deg;
 }
 
-/* ✅ Fixed: was two "0%" stops — changed to correct 0% → 100% */
 @keyframes rotating {
   from { --a: 0deg; }
   to   { --a: 360deg; }
 }
 
 .box {
-  position: relative; /* ✅ Fixed: was "position: top" — invalid value */
+  position: relative; 
   width: 400px;
   height: 200px;
   z-index: 10;
