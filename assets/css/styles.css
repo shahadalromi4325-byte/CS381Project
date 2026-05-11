@@ -34,7 +34,17 @@ img.hero-gif {
   object-fit: cover;
   z-index: -2;
 }
-
+.service-card.locked {
+      opacity: 0.6;
+      cursor: pointer;
+      position: relative;
+    }
+    .service-card.locked:hover {
+      opacity: 0.85;
+    }
+    .availability.unavailable {
+      color: #e53e3e;
+    }
 .overlay {
   position: fixed;
   inset: 0;
