@@ -3,8 +3,8 @@
 session_start();
 
 $isLoggedIn = isset($_SESSION['user_id']);
-$userName   = $isLoggedIn ? htmlspecialchars($_SESSION['full_name']) : '';
-$userRole   = $isLoggedIn ? $_SESSION['role'] : '';
+$userName   = $isLoggedIn ? htmlspecialchars($_SESSION['full_name'] ?? '') : '';
+$userRole   = $isLoggedIn ? ($_SESSION['role'] ?? '') : '';
 
 // ========== FETCH POPULAR BOOKS FROM DATABASE ==========
 include 'database/db_connection.php';
@@ -30,6 +30,9 @@ try {
 
 <body>
   <div class="overlay"></div>
+
+  <!-- Background Video -->
+  <img src="assets/images/animation.webm" alt="Background Animation" class="hero-gif">
 
   <!-- Logo -->
   <div class="logo">
@@ -76,11 +79,9 @@ try {
   <!-- ===== HERO ===== -->
   <section id="home" class="hero-section visible">
 
-    <img src="assets/images/animation.webm" alt="University animation" class="hero-gif">
-
     <div class="contant">
       <?php if ($isLoggedIn): ?>
-        <h1>Welcome back,<br><?= $userName ?> <i class="fa-solid fa-hand-wave"></i></h1>
+        <h1>Welcome back,<br><?= $userName ?> <i class="fas fa-hands"></i></h1>
       <?php else: ?>
         <h1>Welcome to<br>YIC University Library</h1>
       <?php endif; ?>
@@ -135,7 +136,7 @@ try {
     </div>
   </section>
 
-  <!-- ===== POPULAR BOOKS  ===== -->
+  <!-- ===== POPULAR BOOKS ===== -->
   <section id="popular" class="popular-books">
     <div class="section-title"><i class="fas fa-fire"></i> Most Popular Books</div>
     <div class="books-grid">
@@ -144,21 +145,20 @@ try {
         <?php foreach ($popularBooks as $book): ?>
           <div class="book-card" onclick="location.href='pages/books.php'">
             <div class="book-icon"><i class="fas fa-book"></i></div>
-            <h4><?= htmlspecialchars($book['title']) ?></h4>
-            <p><?= htmlspecialchars($book['author']) ?></p>
+            <h4><?= htmlspecialchars($book['title'] ?? '') ?></h4>
+            <p><?= htmlspecialchars($book['author'] ?? '') ?></p>
 
-            <?php if ($book['available'] > 1): ?>
+            <?php $avail = (int)($book['available'] ?? 0); $qty = (int)($book['quantity'] ?? 0); ?>
+            <?php if ($avail > 1): ?>
               <span class="availability">
                 <i class="fas fa-check-circle"></i>
-                <?= $book['available'] ?> of <?= $book['quantity'] ?> available
+                <?= $avail ?> of <?= $qty ?> available
               </span>
-            <?php elseif ($book['available'] === 1 || $book['available'] === '1'): ?>
-              <!-- تحذير: نسخة وحدة فقط -->
+            <?php elseif ($avail === 1): ?>
               <span class="availability low">
                 <i class="fas fa-exclamation-circle"></i> 1 copy left
               </span>
             <?php else: ?>
-              <!-- غير متاح -->
               <span class="availability unavailable">
                 <i class="fas fa-times-circle"></i> Not Available
               </span>
@@ -258,7 +258,6 @@ try {
       <form id="feedbackForm" novalidate>
         <div class="form-group">
           <label for="userName">Full Name</label>
-          <!-- ✅ لو مسجّل، الاسم يتعبّى تلقائياً -->
           <input type="text" id="userName" placeholder="Your full name"
                  value="<?= $isLoggedIn ? $userName : '' ?>" autocomplete="name">
           <span class="error-msg" id="nameError"></span>
@@ -266,7 +265,7 @@ try {
         <div class="form-group">
           <label for="userEmail">Email Address</label>
           <input type="email" id="userEmail" placeholder="your@email.com"
-                 value="<?= $isLoggedIn ? htmlspecialchars($_SESSION['email']) : '' ?>" autocomplete="email">
+                 value="<?= $isLoggedIn ? htmlspecialchars($_SESSION['email'] ?? '') : '' ?>" autocomplete="email">
           <span class="error-msg" id="emailError"></span>
         </div>
         <div class="form-group">
