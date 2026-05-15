@@ -23,12 +23,6 @@ $categories = array_unique(array_filter(array_column($db_books, 'category')));
 </head>
 <body>
 
-  <!-- Background Video -->
-  <video autoplay loop muted playsinline class="hero-gif">
-    <source src="../assets/images/Video.webm" type="video/webm">
-  </video>
-  <div class="overlay"></div>
-
   <!-- Logo -->
   <div class="logo">
     <img src="../assets/images/logo.png" alt="YIC Library Logo" class="logo-img">

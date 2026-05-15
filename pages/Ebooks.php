@@ -19,24 +19,24 @@ try {
   <link rel="stylesheet" href="../assets/css/Ebooks.css">
 </head>
 <body>
-  <img src="../assets/images/animation.gif" class="hero-gif">
-  <div class="overlay"></div>
-  <div class="logo"><img src="../assets/images/logo.png" class="logo-img"></div>
+  <!-- No video/gif background — body gradient is the background -->
+  <div class="logo"><img src="../assets/images/logo.png" class="logo-img" alt="YIC Logo"></div>
 
   <nav class="nav-links">
     <ul>
       <li><a class="links" href="../index.php"><i class="fas fa-home"></i> Home</a></li>
-      <li><a class="links" href="books.php"><i class="fas fa-book"></i> Books</a></li>
-      <li><a class="links active" href="Ebooks.php"><i class="fas fa-tablet-alt"></i> E-Books</a></li>
+      <li><a class="links active" href="books.php"><i class="fas fa-book"></i> Books</a></li>
+      <li><a class="links" href="Ebooks.php"><i class="fas fa-tablet-alt"></i> E-Books</a></li>
+      <li><a class="links" href="../index.php#services"><i class="fas fa-cogs"></i> Services</a></li>
       <li><a class="links" href="borrowed-books.php"><i class="fas fa-bookmark"></i> My Books</a></li>
     </ul>
   </nav>
 
+
   <div class="books-catalog-container">
     <h1><i class="fas fa-tablet-alt"></i> E-Books Digital Library</h1>
 
-    <!-- Search -->
-    <div class="search-container" style="margin-bottom:24px;">
+    <div class="search-container">
       <input type="text" class="search-input" id="searchInput"
              placeholder="Search by title or author..."
              oninput="filterEbooks()">
@@ -48,21 +48,22 @@ try {
              data-title="<?= strtolower(htmlspecialchars($ebook['title'])) ?>"
              data-author="<?= strtolower(htmlspecialchars($ebook['author'])) ?>">
 
-          <!-- Icon -->
           <div class="book-icon">
             <i class="fas <?= htmlspecialchars($ebook['icon'] ?? 'fa-file-pdf') ?>"></i>
           </div>
 
-          <!-- Info -->
           <h3><?= htmlspecialchars($ebook['title']) ?></h3>
+
           <div class="book-meta">
             <span><i class="fas fa-user"></i> <?= htmlspecialchars($ebook['author']) ?></span>
-            <span><i class="fas fa-tag"></i> <?= htmlspecialchars($ebook['category'] ?? '') ?></span>
-            <span><i class="fas fa-file"></i> <?= htmlspecialchars($ebook['format']) ?></span>
-            <span><i class="fas fa-hdd"></i> <?= htmlspecialchars($ebook['size'] ?? '') ?></span>
+            <span><i class="fas fa-tag"></i> <?= htmlspecialchars($ebook['category'] ?? '—') ?></span>
+            <span>
+              <i class="fas fa-file"></i> <?= htmlspecialchars($ebook['format']) ?>
+              &nbsp;|&nbsp;
+              <i class="fas fa-hdd"></i> <?= htmlspecialchars($ebook['size'] ?? '—') ?>
+            </span>
           </div>
 
-          <!-- Download button -->
           <?php if (!empty($ebook['file_path'])): ?>
             <a class="download-btn"
                href="../<?= htmlspecialchars($ebook['file_path']) ?>"
@@ -79,7 +80,10 @@ try {
       <?php endforeach; ?>
 
       <?php if (empty($db_ebooks)): ?>
-        <p style="color:#888;text-align:center;padding:40px;">No e-books available.</p>
+        <p style="color:rgba(255,255,255,0.5);text-align:center;padding:60px;grid-column:1/-1;">
+          <i class="fas fa-box-open" style="font-size:2.5rem;display:block;margin-bottom:12px;"></i>
+          No e-books available.
+        </p>
       <?php endif; ?>
     </div>
   </div>

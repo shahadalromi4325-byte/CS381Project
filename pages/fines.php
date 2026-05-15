@@ -30,8 +30,6 @@ foreach ($fines as $f) {
   <link rel="stylesheet" href="../assets/css/fines.css">
 </head>
 <body>
-  <img src="../assets/images/animation.gif" class="hero-gif">
-  <div class="overlay"></div>
   <div class="logo"><img src="../assets/images/logo.png" class="logo-img"></div>
 
   <nav class="nav-links">

@@ -1,129 +1,163 @@
-/* Inherit base catalog styles */
+body {
+  background: linear-gradient(120deg, #0D1F5C, #6B2FD9, #1DB87A);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55); 
+  z-index: 0;
+}
+
+/* ===== CONTAINER ===== */
 .books-catalog-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 120px auto 50px;
-    padding: 30px;
-    background: rgba(31, 58, 107, 0.75);
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    color: white;
-    z-index: 10;
-    position: relative;
+  width: 90%;
+  max-width: 1200px;
+  margin: 120px auto 50px;
+  padding: 36px 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  color: white;
+  z-index: 10;
+  position: relative;
 }
 
-/* E-Book Specific Metadata */
-.ebook-specs {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    font-size: 0.82em;
-    color: #cdd;
+.books-catalog-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.ebook-specs span {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.ebook-specs i {
-    color: #ffeb3b;
-    margin-right: 4px;
-}
-
-/* Digital Action Button */
-.download-btn {
-    width: 100%;
-    padding: 10px 14px;
-    background: #28a745; /* Green for downloads */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.95em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.download-btn:hover {
-    background: #218838;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
-}
-
-/* Grid and Card reuse from books.css */
-.books-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 25px;
-}
+/* ===== SEARCH ===== */
 .search-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .search-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 12px 18px;
-    border-radius: 30px;
-    border: 2px solid rgba(255,255,255,0.3);
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    font-size: 1em;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    transition: border-color 0.3s;
-    outline: none;
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 18px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1em;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  transition: border-color 0.3s;
+  outline: none;
+}
+.search-input::placeholder { color: rgba(255,255,255,0.45); }
+.search-input:focus { border-color: rgba(255,255,255,0.6); }
+
+/* ===== GRID ===== */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 24px;
 }
 
-.search-input::placeholder { color: rgba(255,255,255,0.55); }
-.search-input:focus { border-color: rgba(255,255,255,0.7); }
-.filter-select {
-    padding: 12px 18px;
-    border-radius: 30px;
-    border: 2px solid rgba(255,255,255,0.3);
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.filter-select option { background: #1f3a6b; color: #fff; }
-.filter-select:focus  { border-color: rgba(255,255,255,0.7); }
-
-.results-info {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 0.95em;
-    opacity: 0.85;
-}
-
+/* ===== BOOK CARD ===== */
 .book-card {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 18px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    text-align: center;
-    transition: 0.3s;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 22px 16px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .book-card:hover {
-    background: rgba(255, 255, 255, 0.16);
-    transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.13);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
-.book-cover {
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3.5rem;
-    opacity: 0.7;
-    margin-bottom: 15px;
+/* ===== ICON ===== */
+.book-icon {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 4px;
+}
+
+/* ===== TEXT ===== */
+.book-card h3 {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+  margin: 0;
+  /* fix overflow */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.80rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.book-meta span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ===== DOWNLOAD BUTTON ===== */
+.download-btn {
+  display: block;
+  margin-top: auto;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #1a7a3c, #28a745);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.download-btn:hover {
+  background: linear-gradient(135deg, #155f2f, #218838);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(40, 167, 69, 0.4);
+}
+
+.download-btn.disabled {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.35);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .books-catalog-container { padding: 100px 16px 40px; width: 95%; }
+  .books-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
 }

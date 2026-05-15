@@ -13,6 +13,13 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   color: white;
   overflow-x: hidden;
+  background: linear-gradient(
+    135deg,
+    #0F172A,
+    #111827,
+    #1E1B4B
+    
+  );
 }
 .service-card.locked {
       opacity: 0.6;
@@ -48,7 +55,7 @@ img.hero-gif {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(20, 42, 80, 0.65);
+  background: rgba(20, 42, 80, 0.226);
   z-index: -1;
 }
 
